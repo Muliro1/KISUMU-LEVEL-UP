@@ -1,0 +1,47 @@
+div input {
+	display:block;
+	margin:auto;
+	padding-top: 10px;
+
+} 
+
+h1{
+	text-align:center;
+	text-decoration:underline;
+	font-family:"Times New Roman", Times, serif;
+	font-size:2vw;
+	background-color:DarkGrey;
+	padding:10px;
+	margin-top:auto;
+}
+
+body{
+	background-color:LightGray;
+}
+
+
+div select {
+	display:block;
+	margin:10px;
+} 
+
+.input{
+	background-color:Black;
+	margin-top:3px
+}
+div p{
+	text-align:center;
+	text-transform:uppercase;
+	letter-spacing:3px;
+
+}
+p{
+	text-align:center;
+	text-transform:uppercase;
+}
+#usrinpt{
+	margin-bottom:30px;
+}
+
+
+
