@@ -27,37 +27,4 @@ class LogIn(Signup):
 	def verify(self, email, password):
 		if self.email in self.user_info['email'] and self.password in self.user_info['password']:
 			return 'You are now logged in as {}'.format(self.user_info['names'][self.user_id])
-		return('You have to register in order to log in')
-
- 
-
-
-	
-	
-
-		
-
-		
-		
-
-
-
-
-
-
-
- 
-
-
-	
-	
-
-		
-
-		
-		
-
-
-
-
-
+		return('You have to register in order to log in'
