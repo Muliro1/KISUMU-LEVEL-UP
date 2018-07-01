@@ -19,29 +19,3 @@ class Signup():
                 self.user_info['names'].append(self.firstname + ' ' + self.lastname)
         
 class LogIn(Signup):
-        '''
-        this class in herits from the Signup class
-        and extends functionality by adding the ability
-        to log in
-        '''
-        def __init__(self, email, password):
-                self.email = email
-                self.password = password
-        def verify(self):
-                if self.email in Signup.user_info['email'] and self.password in Signup.user_info['password']:
-                    return('You are now logged in as {}'.format(self.user_info['names'][self.user_id]))
-                return('You have to register in order to log in')
-
-	
-	
-
-		
-
-		
-		
-
-
-
-
-
- #self.items.update({item_name: quantity})
