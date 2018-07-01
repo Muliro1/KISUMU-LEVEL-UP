@@ -1,0 +1,8 @@
+    {%extends 'layout.html'%}    
+    {%block content%}
+        {%for content in dummy_data%}
+            <h1>{{content.title}}</h1>
+            <p>By {{content.author}} on {{content.date_posted}}</p>
+            <p>{{content.info}}
+        {%endfor%}
+    {%endblock content%}

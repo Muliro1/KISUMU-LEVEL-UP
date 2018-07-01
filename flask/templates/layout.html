@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    {%if title%}
+             <title>
+    	         Flask - {{title}}
+             </title>
+        {%else%}
+             <title>
+		         Home page
+		     </title>
+        {%endif%} 
+        <link rel = 'stylesheet' type = 'text/css' src = 'main.css'>
+    </head>
+    <body>
+        <header >
+  <nav>
+    <div>
+      <a href="/">Flask Blog</a>
+      <button>
+        <span ></span>
+      </button>
+      <div>
+        <div>
+          <a href="{{ url_for('home')}}">Home</a>
+          <a href="{{ url_for('info')}}">About</a>
+          <a href="{{ url_for('register')}}">Register</a>
+        </div>
+        <div>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main role=>
+  <div>
+    <div>
+        {%with messages = get_flashed_messages()%}
+            {%if messages %}
+                {%for message in messages%}
+                    <div>
+                        {{message}}
+                    </div>
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
+        {%block content%}
+        {%endblock%}
+    </body>
+</html>
