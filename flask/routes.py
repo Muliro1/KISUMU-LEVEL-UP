@@ -1,30 +1,23 @@
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask, render_template, url_for, flash, redirect, request, session
 from forms import LoginForm, RegistrationForm
-from db import dummy_users
+import os
+
+
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'relapse92'
 
-dummy_data = [{
-	'author': 'Michael Muliro',
-	'title': 'First post',
-	'info': 'This is the first post',
-	'date_posted': 'une 27th 2018'
-},
-{
-	'author': 'Hayley Williams',
-	'title': 'First post',
-	'info': 'This is the second post',
-	'date_posted': 'une 27th 2018'
-}]
+
+database = {}
+user_id = len(database) + 1
 
 
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', dummy_data = dummy_data)
+    return render_template('home.html', database = database)
 
 @app.route('/info')
 def info():
@@ -34,6 +27,7 @@ def info():
 def register():
 	form = RegistrationForm()
 	if form.validate_on_submit():
+		database.update({'username':form.username.data})
 		flash('Account created for {}'.format(form.username.data))
 		return redirect(url_for('home'))
 	return render_template('register.html', title = 'Registration Page', form = form)
@@ -41,11 +35,21 @@ def register():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	form = LoginForm()
-	if form.validate_on_submit():
-		if form.email.data in dummy_users['emails'] and form.password.data in dummy_users['passwords']:
-			flash('You are now logged in as {}'.format(dummy_users['usernames']))
+	if form.validate_on_submit() and request.method ==  'POST':
+		session['username'], session['email'] == form.username.data, form.email.data
+		if form.username.data in database:
+			flash('You are now logged in as {}'.format(form.username.data))
 			return redirect(url_for('home'))
 	return render_template('login.html', title = 'Login Page', form = form)
 
+@app.route('/logout', methods = ['GET', 'POST'])
+def logout():
+	session.pop('username', None)
+	session.pop('email', None)
+	return redirect(url_for('login'))
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.secret_key = os.urandom(12)
+	app.run(debug = True)
+    

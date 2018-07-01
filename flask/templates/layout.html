@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel = 'stylesheet' type = 'text/css' src = 'main.css'>
 	    {%if title%}
-             <title>
+             <title class = 'site-text'>
     	         Flask - {{title}}
              </title>
         {%else%}
-             <title>
+             <title class = 'site-text'>
 		         Home page
 		     </title>
         {%endif%} 
-        <link rel = 'stylesheet' type = 'text/css' src = 'main.css'>
     </head>
     <body>
         <header >
   <nav>
     <div>
-      <a href="/">Flask Blog</a>
+      <a href="/home" class = 'site-text'>Flask Blog</a>
       <button>
         <span ></span>
       </button>
       <div>
-        <div>
+        <div class = 'site-text'>
           <a href="{{ url_for('home')}}">Home</a>
           <a href="{{ url_for('info')}}">About</a>
           <a href="{{ url_for('register')}}">Register</a>
-        </div>
-        <div>
-          
+          <a href="{{ url_for('logout')}}">Logout</a>
         </div>
       </div>
     </div>
   </nav>
 </header>
-<main role=>
+<main>
   <div>
     <div>
         {%with messages = get_flashed_messages()%}
             {%if messages %}
                 {%for message in messages%}
-                    <div>
+                    <div class = 'notify'>
                         {{message}}
                     </div>
                 {%endfor%}
