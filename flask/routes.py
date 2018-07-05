@@ -18,6 +18,7 @@ app.config['SECRET_KEY'] = 'relapse92'
 
 database = {}
 post_database = {}
+comment_id = len(post_database) + 1
 user_id = len(database) + 1
 
 
@@ -62,7 +63,7 @@ def new_post():
 	form = PostForm()
 	if form.validate_on_submit():
 		post = Post(title = form.title.data, content = form.content.data, author = current_user)
-		post_database.update({form.content.data})
+		post_database.update({comment_id:form.content.data})
 		flash('Your post has been created', 'success')
 		return redirect(url_for('hello'))
 	return render_template('createpost.html', title =  'New Post', form = form, legend = 'New Post')
@@ -75,6 +76,13 @@ def account():
 		form.username.data = current_user.username
 		form.email.data = current_user.email
 		return render_template('account.html', title =  'Account', form = form)
+		
+app.route("/post/<int:post_id>/delete",  methods = [ 'POST'])
+@login_required
+def delete_post(post_id):
+	del(post_database[comment_id])
+	flash('Your post has been deleted', 'success')
+	return redirect(url_for('hello'))
 
 
 
