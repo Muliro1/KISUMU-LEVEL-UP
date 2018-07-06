@@ -45,8 +45,10 @@ def register():
 def login():
 	form = LoginForm()
 	if form.validate_on_submit() and request.method ==  'POST':
-		session['username'], session['email'] == form.username.data, form.email.data
-		if form.username.data in database:
+		session.update({'username':form.username.data})
+		session.update({'email':form.email.data})
+		database.update({'username':form.username.data})
+		if form.username.data in database.values():
 			flash('You are now logged in as {}'.format(form.username.data))
 			return redirect(url_for('home'))
 	return render_template('login.html', title = 'Login Page', form = form)
@@ -62,10 +64,9 @@ def logout():
 def new_post():
 	form = PostForm()
 	if form.validate_on_submit():
-		post = Post(title = form.title.data, content = form.content.data, author = current_user)
 		post_database.update({comment_id:form.content.data})
 		flash('Your post has been created', 'success')
-		return redirect(url_for('hello'))
+		return redirect(url_for('home'))
 	return render_template('createpost.html', title =  'New Post', form = form, legend = 'New Post')
 
 @app.route("/account", methods = ['GET', 'POST'])
